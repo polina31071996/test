@@ -3,8 +3,6 @@
 
 import numpy as np
 
-
-
 def random_predict(number: int = 1) -> int:
     """Рандомно угадываем число
 
@@ -15,12 +13,14 @@ def random_predict(number: int = 1) -> int:
         int: Число попыток
     """
     count = 0
+    #создаем и сортируем массив чисел и проводим разметку массива
     predict = [np.random.randint(1, 101) for i in range(100)]
     predict.sort()
     left = 0
     right = len(predict)-1
     center = (left + right) // 2
     
+    #проводим сравнение диапазонов и загаданного числа
     while predict[center] != number:
         count +=1
         if number > predict[center]:
@@ -29,11 +29,8 @@ def random_predict(number: int = 1) -> int:
         center = (left + right) // 2
         if left > right:
             break
-
-    
                                 
     return count
-
 
 #функция для оценки
 
@@ -55,7 +52,5 @@ def score_game(random_predict) -> int:
 
     score = int(np.mean(count_ls))
     print(f"Ваш алгоритм угадывает число в среднем за: {score} попытки")
-    
-#Run benchmarking to score effectiveness of all algorithms
-print('Run benchmarking for random_predict: ', end='')
+
 score_game(random_predict)
